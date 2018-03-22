@@ -17,46 +17,153 @@
 <ion-header no-border>
   <ion-navbar color="secondary">
   
-        <h1>The Sweet Sensation Ph</h1>
+       <img src="assets/imgs/Logo1.png"/>
     
   </ion-navbar>
 </ion-header>
 
-
-
-<div>
-   
-
-</div>
-
-<ion-content class="card-background-page">
-
+<ion-content>
+<div class="card-background-page">
   <ion-card>
     <img src="assets/imgs/puto.jpg"/>
     <div class="card-title">PUTO</div>
     <div class="card-subtitle">Puto in Pampanga.</div>
   </ion-card>
+</div>
+  
 
-  <ion-card>
-    <img src="assets/imgs/bibingka.jpg"/>
-    <div class="card-title">Bibingka</div>
-    <div class="card-subtitle">Pride of Pampanga.</div>
-  </ion-card>
 
-  <ion-card>
-    <img src="assets/imgs/leche.jpg"/>
-    <div class="card-title">Leche</div>
-    <div class="card-subtitle">Sweet delicacies.</div>
-  </ion-card>
+<div padding>
+  <p style="text-align: center; ">This is sweet sensation ph, where all our mini blog are posted in our app. Feel free to visit our mini collection of blog. </p>
+</div>
 
-  <ion-card>
-    <img src="assets/imgs/suman.jpg"/>
-    <div class="card-title">Suman</div>
-    <div class="card-subtitle">Best suman found in Pampanga.</div>
-  </ion-card>
+<ion-content padding>
+<div>
+  <ion-segment [(ngModel)]="pet">
+    <ion-segment-button class="segment-button segment-activated" value="Login">
+      Login
+    </ion-segment-button>
+    <ion-segment-button value="puppies">
+      Register
+    </ion-segment-button>
+  </ion-segment>
+</div>
 
+<div [ngSwitch]="pet">
+  <ion-list *ngSwitchCase="'puppies'">
+            <ion-grid>
+              <ion-row center>
+                    <ion-col>
+                       
+                    </ion-col>
+              </ion-row>
+          </ion-grid>
+      <form class="form" [formGroup]="register_form"  (ngSubmit)="onSubmit(register_form.value)">
+
+    <ion-item>
+      <ion-label color="secondary" floating>Username</ion-label>
+      <ion-input color="secondary" type="text" formControlName="username" class="form-controll" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="secondary" floating>Display Name</ion-label>
+      <ion-input color="secondary" type="text" formControlName="displayName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="secondary" floating>Email</ion-label>
+      <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="secondary" floating>Password</ion-label>
+      <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <br>
+    <button ion-button full type="submit" color="secondary" [disabled]="!register_form.valid">Submit</button>
+  </form>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Login'">
+      <form class="form" [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
+          <ion-grid>
+              <ion-row center>
+                    <ion-col>
+                        
+                    </ion-col>
+              </ion-row>
+          </ion-grid>
+    <ion-item>
+      <ion-label color="secondary" floating>Username</ion-label>
+      <ion-input type="text" formControlName="username" class="form-controll" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="secondary" floating>Password</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    <div margin>
+    <p class="error-message" *ngIf="error_message">{{error_message}}</p>
+    <button ion-button full class="login-button" [disabled]="!login_form.valid" type="submit" color="secondary">Login</button>
+    <div margin>
+    <a class="center" href="#">Forgot password?</a>
+    </div>
+  </div>
+  </form>
+  </ion-list>
+  <ion-list *ngSwitchCase="'main'">
+      <ion-grid margin-top>
+          <ion-row center margin-top>
+                <ion-col text-center margin-top>
+                    <h1 padding class="logo">Sweet Sensation</h1>
+                    <h5 margin-top style="margin-top:-30px; color:rgb(233, 233, 233);"></h5>
+                    <button style="margin-top:50px;" ion-button color="secondary" (click)="skip()">About this App</button>
+                </ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-list>
+</div>
+<div margin-top style="margin:0 auto; width:100%; padding:5px;">
+
+</div>
 </ion-content>
 
+<div padding style="background-color:  #f4bee6;">
+
+
+<h2>GALLERY</h2>
+  <br>
+<br>
+
+  
+<table style="width:100%">
+  <tr>
+    <th><img src="assets/imgs/bibingka.jpg" width="80%" class="thumb-img" imageViewer></th>
+    <th><img src="assets/imgs/kutsinta.jpg" width="80%" class="thumb-img" imageViewer></th> 
+  </tr>
+</table>
+<br>
+<br>
+<table style="width:100%">
+  <tr>
+    <td><img src="assets/imgs/leche.jpg" width="80%" class="thumb-img" imageViewer ></td>
+    <td><img src="assets/imgs/suman.jpg" width="80%" class="thumb-img" imageViewer></td>
+  </tr>
+</table>
+<br>
+<br>
+<table style="width:100%">
+  <tr>
+   <th><img src="assets/imgs/puto.jpg" width="80%" class="thumb-img" imageViewer></th>
+   <th><img src="assets/imgs/tibok.jpg" width="80%" class="thumb-img" imageViewer></th>  
+  </tr>
+</table>
+<br>
+<br>
+<br>
+<br>
+</div>
+</ion-content>
 <ion-footer>
 
   <ion-toolbar color = "secondary" style = "text-align: center;">ALL RIGHTS RESERVED 2018</ion-toolbar>

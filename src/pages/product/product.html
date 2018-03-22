@@ -1,67 +1,51 @@
-<html>
-<head>
-<title>Ionic Page</title>
-   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title *ngIf="post">
+      Post
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--
-<link href="http://code.ionicframework.com/1.0.0-beta.1/css/ionic.css" rel="stylesheet">
-<script src="http://code.ionicframework.com/1.0.0-beta.14/js/ionic.bundle.js"></script>-->
-</head>
-<body>
-
-
-
-
-<div>
-<ion-card>
-
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/imgs/puto.jpg">
-    </ion-avatar>
-    <h2>Puto Puto</h2>
-    <p>November 5, 1955</p>
-  </ion-item>
-
-  <img src="assets/imgs/puto.jpg">
-
-  <ion-card-content>
-    <p>So this is the puto that i want to tell all of you.</p>
-  </ion-card-content>
-
-  <ion-row>
-    <ion-col>
-      <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>12 Likes</div>
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left clear small>
-        <ion-icon name="text"></ion-icon>
-        <div>4 Comments</div>
-      </button>
-    </ion-col>
-    <ion-col center text-center>
-      <ion-note>
-        11h ago
-      </ion-note>
-    </ion-col>
-  </ion-row>
-
-</ion-card>
-
-</div>
+<ion-content padding>
+  <div *ngIf="post" class="post">
+    <div class="post-title" [innerHTML]="post.title.rendered"></div>
+    <p class="post-content" [innerHTML]="post.content.rendered"></p>
+    <ion-row>
+      <ion-col>
+        <ion-icon name='md-calendar'></ion-icon>
+        {{post.date.split('T')[0]}}
+      </ion-col>
+      <ion-col text-right>
+        <ion-icon name="person"></ion-icon>
+        {{user}}
+      </ion-col>
+    </ion-row>
+    <p class="bold-title">Categories:</p>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="category-col" *ngFor="let category of categories">
+          <ion-badge (click)="goToCategoryPosts(category.id, category.name)">{{category.name}}</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <p class="bold-title">Comments:</p>
+    <ion-item *ngFor="let comment of comments">
+      <ion-avatar item-start>
+        <img src="{{comment.author_avatar_urls[24]}}">
+      </ion-avatar>
+      <h2>{{comment.author_name}}</h2>
+      <p [innerHTML]="comment.content.rendered"></p>
+    </ion-item>
+    <ion-infinite-scroll [enabled]="morePagesAvailable" (ionInfinite)="loadMoreComments($event)">
+      <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more comments...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+ </div>
+</ion-content>
 <ion-footer>
-
-  <ion-toolbar color = "secondary" style = "text-align: center;">ALL RIGHTS RESERVED 2018</ion-toolbar>
-
-  </ion-footer>
-</body>
-</html>
+ <ion-toolbar>
+  <button ion-button block color="danger" (click)="createComment()">Add a Comment</button>
+ </ion-toolbar>
+</ion-footer>

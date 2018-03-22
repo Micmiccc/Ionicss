@@ -1,0 +1,91 @@
+<ion-content padding>
+  <div>
+  <ion-segment [(ngModel)]="pet">
+    <ion-segment-button class="segment-button segment-activated" value="Login">
+      Login
+    </ion-segment-button>
+    <ion-segment-button value="puppies">
+      Register
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div [ngSwitch]="pet">
+  <ion-list *ngSwitchCase="'puppies'">
+            <ion-grid>
+              <ion-row center>
+                    <ion-col>
+                        <h1 margin-top style="text-shadow:1px 0px #222; font-family:rage; font-size:65px; color:#fff; font-weight:500;">Sweet Sensation</h1>
+                    </ion-col>
+              </ion-row>
+          </ion-grid>
+      <form class="form" [formGroup]="register_form"  (ngSubmit)="onSubmit(register_form.value)">
+
+    <ion-item>
+      <ion-label color="light" floating>Username</ion-label>
+      <ion-input color="light" type="text" formControlName="username" class="form-controll" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="light" floating>Display Name</ion-label>
+      <ion-input color="light" type="text" formControlName="displayName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="light" floating>Email</ion-label>
+      <ion-input color="light" type="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="light" floating>Password</ion-label>
+      <ion-input color="light" type="password" formControlName="password"></ion-input>
+    </ion-item>
+    <br>
+    <button ion-button full type="submit" color="danger" [disabled]="!register_form.valid">Submit</button>
+  </form>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Login'">
+      <form class="form" [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
+          <ion-grid>
+              <ion-row center>
+                    <ion-col>
+                        <h1 margin-top style="text-shadow:1px 0px #222; font-family:rage; font-size:65px; color:#fff; font-weight:500;">Sweet Sensation</h1>
+                    </ion-col>
+              </ion-row>
+          </ion-grid>
+    <ion-item>
+      <ion-label color="light" floating>Username</ion-label>
+      <ion-input type="text" formControlName="username" class="form-controll" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="light" floating>Password</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    <div margin>
+    <p class="error-message" *ngIf="error_message">{{error_message}}</p>
+    <button ion-button full class="login-button" [disabled]="!login_form.valid" type="submit" color="danger">Login</button>
+    <div margin>
+    <a class="center" href="#">Forgot password?</a>
+    </div>
+  </div>
+  </form>
+  </ion-list>
+  <ion-list *ngSwitchCase="'main'">
+      <ion-grid margin-top>
+          <ion-row center margin-top>
+                <ion-col text-center margin-top>
+                    <h1 padding class="logo">Sweet Sensation</h1>
+                    <h5 margin-top style="margin-top:-30px; color:rgb(233, 233, 233);">Life is Either A Daring Adventure or Nothing at all</h5>
+                    <button style="margin-top:50px;" ion-button color="danger" (click)="skip()">View Latest Post</button>
+                </ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-list>
+</div>
+<div margin-top style="margin:0 auto; width:100%; padding:5px;">
+
+</div>
+
+</ion-content>
