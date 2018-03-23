@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="danger">
+  <ion-navbar color="primary">
     <ion-title *ngIf="post">
       Post
     </ion-title>
@@ -46,7 +46,6 @@
 </ion-content>
 <ion-footer>
  <ion-toolbar>
-  <button ion-button block color="danger" (click)="createComment()">Add a Comment</button>
+  <button ion-button block (click)="createComment()">Add a Comment</button>
  </ion-toolbar>
 </ion-footer>
-
